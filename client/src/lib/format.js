@@ -1,4 +1,4 @@
-export function formatCurrency(value, currency = 'USD') {
+export function formatCurrency (value, currency = 'USD') {
   try {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -10,7 +10,7 @@ export function formatCurrency(value, currency = 'USD') {
   }
 }
 
-export function formatTimeLeft(endTime) {
+export function formatTimeLeft (endTime) {
   const ms = new Date(endTime).getTime() - Date.now()
   if (ms <= 0) return 'Ended'
   const total = Math.floor(ms / 1000)

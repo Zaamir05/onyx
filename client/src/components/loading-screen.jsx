@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 
-export function LoadingScreen({ loading }) {
+export function LoadingScreen ({ loading }) {
   return (
     <AnimatePresence>
       {loading ? (

@@ -1,6 +1,6 @@
 const API_PREFIX = '/api/v1'
 
-export async function apiRequest(path, options = {}) {
+export async function apiRequest (path, options = {}) {
   const response = await fetch(`${API_PREFIX}${path}`, {
     method: options.method || 'GET',
     credentials: 'include',

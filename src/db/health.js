@@ -12,5 +12,4 @@ async function assertReplicaSetReady () {
     )
   }
 }
-
 module.exports = { assertReplicaSetReady }

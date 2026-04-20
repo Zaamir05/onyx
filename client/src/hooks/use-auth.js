@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { apiRequest } from '../api/client'
 
-export function useAuth() {
+export function useAuth () {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -22,7 +22,7 @@ export function useAuth() {
     void refresh()
   }, [])
 
-  async function login(values) {
+  async function login (values) {
     setError('')
     const payload = await apiRequest('/users/auth/login', {
       method: 'POST',
@@ -31,7 +31,7 @@ export function useAuth() {
     setUser(payload.data.user)
   }
 
-  async function register(values) {
+  async function register (values) {
     setError('')
     await apiRequest('/users/auth/register', {
       method: 'POST',
@@ -39,7 +39,7 @@ export function useAuth() {
     })
   }
 
-  async function logout() {
+  async function logout () {
     await apiRequest('/users/auth/logout', { method: 'POST' })
     setUser(null)
   }

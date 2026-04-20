@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import clsx from 'clsx'
 import { formatCurrency, formatTimeLeft } from '../lib/format'
 
-export function AuctionCard({ auction, selected, onSelect }) {
+export function AuctionCard ({ auction, selected, onSelect }) {
   const ended = auction.status !== 'active'
 
   return (

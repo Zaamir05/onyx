@@ -4,13 +4,13 @@ import { motion } from 'framer-motion'
 const initialLogin = { email: '', password: '' }
 const initialRegister = { email: '', password: '', fullName: '', role: 'buyer' }
 
-export function AuthPanel({ onLogin, onRegister, error }) {
+export function AuthPanel ({ onLogin, onRegister, error }) {
   const [mode, setMode] = useState('login')
   const [loginValues, setLoginValues] = useState(initialLogin)
   const [registerValues, setRegisterValues] = useState(initialRegister)
   const [busy, setBusy] = useState(false)
 
-  async function submitLogin(e) {
+  async function submitLogin (e) {
     e.preventDefault()
     setBusy(true)
     try {
@@ -21,7 +21,7 @@ export function AuthPanel({ onLogin, onRegister, error }) {
     }
   }
 
-  async function submitRegister(e) {
+  async function submitRegister (e) {
     e.preventDefault()
     setBusy(true)
     try {

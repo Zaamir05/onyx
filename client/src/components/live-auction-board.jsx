@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { AuctionCard } from './auction-card'
 import { formatCurrency, formatTimeLeft } from '../lib/format'
 
-export function LiveAuctionBoard({
+export function LiveAuctionBoard ({
   auctions,
   selectedAuction,
   selectedAuctionId,
@@ -19,7 +19,7 @@ export function LiveAuctionBoard({
     return selectedAuction.currentBid + selectedAuction.minBidIncrement
   }, [selectedAuction])
 
-  async function submitBid(e) {
+  async function submitBid (e) {
     e.preventDefault()
     if (!selectedAuction) return
     await onPlaceBid(selectedAuction._id, Number(bidAmount))

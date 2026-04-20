@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { apiRequest } from '../api/client'
 import { io } from 'socket.io-client'
 
-export function useAuctions() {
+export function useAuctions () {
   const [auctions, setAuctions] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -66,7 +66,7 @@ export function useAuctions() {
     }
   }, [auctions])
 
-  async function placeBid(auctionId, bidAmount) {
+  async function placeBid (auctionId, bidAmount) {
     setPlacingBid(true)
     try {
       await apiRequest(`/bids/auctions/${auctionId}`, {
