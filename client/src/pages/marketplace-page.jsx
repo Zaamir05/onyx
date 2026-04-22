@@ -3,8 +3,10 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { apiRequest } from '../api/client'
 import { formatCurrency, formatTimeLeft } from '../lib/format'
+import { useSecondTick } from '../hooks/use-second-tick'
 
 export function MarketplacePage () {
+  const nowMs = useSecondTick(true)
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -28,7 +30,7 @@ export function MarketplacePage () {
     <div className="aurora-bg min-h-screen">
       <section className="mx-auto w-full max-w-7xl px-4 py-10">
         <p className="text-xs uppercase tracking-[0.2em] text-cyan-200">Onyx Marketplace</p>
-        <h1 className="mt-2 font-display text-4xl font-semibold text-white">Cyber-tech lots in active contention</h1>
+        <h1 className="mt-2 text-4xl font-semibold text-white">Cyber-tech lots in active contention</h1>
         <p className="mt-3 max-w-3xl text-slate-300">
           Explore weaponized wearables, neural hardware, and black-market intelligence devices currently running live.
         </p>
@@ -47,7 +49,7 @@ export function MarketplacePage () {
             >
               <div className="mb-2 flex items-center justify-between">
                 <p className="text-sm font-semibold text-white">{auction.title}</p>
-                <span className="rounded-full bg-indigo-500/20 px-2 py-1 text-[10px] uppercase tracking-wider text-indigo-200">
+                <span className="rounded-full bg-cyan-500/20 px-2 py-1 text-[10px] uppercase tracking-wider text-cyan-200">
                   Signal: Live
                 </span>
               </div>
@@ -59,7 +61,7 @@ export function MarketplacePage () {
                 </div>
                 <div className="rounded-lg border border-white/10 bg-black/20 p-2">
                   <p className="text-slate-400">Ends In</p>
-                  <p className="font-semibold text-white">{formatTimeLeft(auction.endTime)}</p>
+                  <p className="font-semibold text-white">{formatTimeLeft(auction.endTime, nowMs)}</p>
                 </div>
               </div>
               <Link

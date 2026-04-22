@@ -21,7 +21,7 @@ export function PlatformPage() {
     <div className="aurora-bg min-h-screen">
       <section className="mx-auto w-full max-w-7xl px-4 py-12">
         <p className="text-xs uppercase tracking-[0.2em] text-cyan-200">Platform Deep Dive</p>
-        <h1 className="mt-2 font-display text-4xl font-semibold text-white">Built for adversarial real-world traffic, not tutorials.</h1>
+        <h1 className="mt-2 text-4xl font-semibold text-white">Built for adversarial real-world traffic, not tutorials.</h1>
         <p className="mt-3 max-w-3xl text-slate-300">
           Every layer is engineered for integrity under contention: transactions, conflict-safe writes, deterministic finalization, and signed settlement events.
         </p>

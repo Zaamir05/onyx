@@ -19,7 +19,7 @@ export function HeroSection() {
           className="font-display text-4xl font-semibold leading-tight text-white sm:text-5xl"
         >
           Trade in the neon underground
-          <span className="bg-gradient-to-r from-cyan-200 via-indigo-200 to-fuchsia-200 bg-clip-text text-transparent"> with deterministic realtime execution.</span>
+          <span className="bg-gradient-to-r from-cyan-200 via-teal-200 to-emerald-200 bg-clip-text text-transparent"> with deterministic realtime execution.</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
@@ -53,8 +53,8 @@ export function HeroSection() {
         <div className="grid gap-3 sm:grid-cols-2">
           <Card title="Live Bid Pulse" value="127 bids / 10s" accent="text-emerald-200" />
           <Card title="Current Prime Lot" value="42,800 ONX" accent="text-cyan-200" />
-          <Card title="Concurrent Users" value="18,204" accent="text-indigo-200" />
-          <Card title="Settlement Integrity" value="99.9%" accent="text-fuchsia-200" />
+          <Card title="Concurrent Users" value="18,204" accent="text-cyan-200" />
+          <Card title="Settlement Integrity" value="99.9%" accent="text-emerald-200" />
         </div>
       </motion.div>
     </section>

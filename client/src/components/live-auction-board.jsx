@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { AuctionCard } from './auction-card'
 import { BidHistoryPanel } from './bid-history-panel'
 import { formatCurrency, formatTimeLeft } from '../lib/format'
+import { useSecondTick } from '../hooks/use-second-tick'
 
 export function LiveAuctionBoard ({
   auctions,
@@ -18,6 +19,7 @@ export function LiveAuctionBoard ({
   onLogout
 }) {
   const [bidAmount, setBidAmount] = useState('')
+  const nowMs = useSecondTick(Boolean(selectedAuction))
   const minBid = useMemo(() => {
     if (!selectedAuction) return 0
     return selectedAuction.currentBid + selectedAuction.minBidIncrement
@@ -49,6 +51,7 @@ export function LiveAuctionBoard ({
                 auction={auction}
                 selected={String(auction._id) === String(selectedAuctionId)}
                 onSelect={() => setSelectedAuctionId(String(auction._id))}
+                nowMs={nowMs}
               />
             </motion.div>
           ))}
@@ -59,7 +62,7 @@ export function LiveAuctionBoard ({
         <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-xs uppercase tracking-[0.2em] text-emerald-200">Authenticated as</p>
-            <h1 className="font-display text-lg font-semibold text-white">{user.fullName}</h1>
+            <h1 className="text-lg font-semibold text-white">{user.fullName}</h1>
             <p className="mt-1 text-xs text-cyan-200">{user.onyxCredits?.toLocaleString?.() || 0} ONX credits</p>
           </div>
           <button
@@ -80,14 +83,14 @@ export function LiveAuctionBoard ({
               className="space-y-5"
             >
               <div>
-                <h2 className="font-display text-2xl font-semibold text-white">{selectedAuction.title}</h2>
+                <h2 className="text-2xl font-semibold text-white">{selectedAuction.title}</h2>
                 <p className="mt-2 max-w-3xl text-sm text-slate-300">{selectedAuction.description}</p>
               </div>
 
               <div className="grid gap-3 sm:grid-cols-3">
                 <Metric title="Current Bid" value={formatCurrency(selectedAuction.currentBid, selectedAuction.currency)} />
                 <Metric title="Minimum Next Bid" value={formatCurrency(minBid, selectedAuction.currency)} />
-                <Metric title="Ends In" value={formatTimeLeft(selectedAuction.endTime)} />
+                <Metric title="Ends In" value={formatTimeLeft(selectedAuction.endTime, nowMs)} />
               </div>
 
               <form onSubmit={submitBid} className="glass neon-ring rounded-2xl p-4">

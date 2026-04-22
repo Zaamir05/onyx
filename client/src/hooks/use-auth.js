@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react'
 import { apiRequest } from '../api/client'
 
+function getReadableAuthError (err, fallback = 'Request failed') {
+  if (Array.isArray(err?.details) && err.details.length > 0) {
+    const first = err.details[0]
+    if (first?.message) return first.message
+  }
+  return err?.message || fallback
+}
+
 export function useAuth () {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -31,7 +39,7 @@ export function useAuth () {
       })
       setUser(payload.data.user)
     } catch (err) {
-      setError(err.message)
+      setError(getReadableAuthError(err, 'Login failed'))
       throw err
     }
   }
@@ -45,7 +53,7 @@ export function useAuth () {
       })
       setUser(payload.data.user)
     } catch (err) {
-      setError(err.message)
+      setError(getReadableAuthError(err, 'Registration failed'))
       throw err
     }
   }
@@ -55,7 +63,7 @@ export function useAuth () {
       await apiRequest('/users/auth/logout', { method: 'POST' })
       setUser(null)
     } catch (err) {
-      setError(err.message)
+      setError(getReadableAuthError(err, 'Logout failed'))
       throw err
     }
   }

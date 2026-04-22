@@ -79,6 +79,7 @@ export function AuthPanel ({ onLogin, onRegister, error }) {
             onChange={(e) => setLoginValues((v) => ({ ...v, password: e.target.value }))}
             className="w-full rounded-xl border border-white/20 bg-black/25 px-3 py-2 text-sm text-white outline-none"
             placeholder="Password (min 12)"
+            minLength={12}
             required
           />
           <button
@@ -111,6 +112,7 @@ export function AuthPanel ({ onLogin, onRegister, error }) {
             onChange={(e) => setRegisterValues((v) => ({ ...v, password: e.target.value }))}
             className="w-full rounded-xl border border-white/20 bg-black/25 px-3 py-2 text-sm text-white outline-none"
             placeholder="Password (min 12)"
+            minLength={12}
             required
           />
           <select
@@ -131,6 +133,7 @@ export function AuthPanel ({ onLogin, onRegister, error }) {
       )}
 
       {notice ? <p className="mt-3 text-xs text-emerald-300">{notice}</p> : null}
+      {!isLogin ? <p className="mt-2 text-[11px] text-slate-400">Password must be at least 12 characters.</p> : null}
       {error ? <p className="mt-3 text-xs text-rose-300">{error}</p> : null}
     </motion.div>
   )

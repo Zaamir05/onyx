@@ -3,8 +3,10 @@ import { Link, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { apiRequest } from '../api/client'
 import { formatCurrency, formatTimeLeft } from '../lib/format'
+import { useSecondTick } from '../hooks/use-second-tick'
 
 export function AuctionDetailPage () {
+  const nowMs = useSecondTick(true)
   const { auctionId } = useParams()
   const [payload, setPayload] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -48,15 +50,15 @@ export function AuctionDetailPage () {
         {payload ? (
           <div className="mt-4 grid gap-5 lg:grid-cols-[1.2fr,0.8fr]">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="glass rounded-3xl p-6">
-              <p className="text-xs uppercase tracking-[0.2em] text-indigo-200">{payload.auction.status}</p>
-              <h1 className="mt-2 font-display text-4xl text-white">{payload.auction.title}</h1>
+              <p className="text-xs uppercase tracking-[0.2em] text-cyan-200">{payload.auction.status}</p>
+              <h1 className="mt-2 text-4xl font-semibold text-white">{payload.auction.title}</h1>
               <p className="mt-4 text-sm text-slate-300">{payload.auction.description}</p>
 
               <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 <Metric label="Current Bid" value={formatCurrency(payload.auction.currentBid, payload.auction.currency)} />
                 <Metric label="Base Price" value={formatCurrency(payload.auction.basePrice, payload.auction.currency)} />
                 <Metric label="Min Increment" value={formatCurrency(payload.auction.minBidIncrement, payload.auction.currency)} />
-                <Metric label="Ends In" value={formatTimeLeft(payload.auction.endTime)} />
+                <Metric label="Ends In" value={formatTimeLeft(payload.auction.endTime, nowMs)} />
               </div>
 
               <div className="mt-6">
@@ -65,7 +67,7 @@ export function AuctionDetailPage () {
                   <motion.div
                     initial={{ width: 0 }}
                     animate={{ width: `${ratio}%` }}
-                    className="h-full rounded-full bg-gradient-to-r from-indigo-400 via-cyan-400 to-fuchsia-400"
+                    className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400"
                   />
                 </div>
               </div>
@@ -83,7 +85,7 @@ export function AuctionDetailPage () {
               </div>
 
               <div className="glass rounded-2xl p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-fuchsia-200">Recent Bid Stream</p>
+                <p className="text-xs uppercase tracking-[0.18em] text-emerald-200">Recent Bid Stream</p>
                 <div className="mt-3 max-h-80 space-y-2 overflow-auto pr-1">
                   {payload.recentBids.map((bid) => (
                     <div key={bid._id} className="rounded-xl border border-white/10 bg-black/25 p-3">

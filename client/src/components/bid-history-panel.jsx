@@ -5,7 +5,7 @@ export function BidHistoryPanel ({ bids, loading, currency }) {
   return (
     <div className="glass rounded-2xl p-4">
       <div className="mb-3 flex items-center justify-between">
-        <p className="text-xs uppercase tracking-[0.18em] text-indigo-200">Bid History</p>
+        <p className="text-xs uppercase tracking-[0.18em] text-cyan-200">Bid History</p>
         {loading ? <span className="loader-spin" /> : null}
       </div>
 

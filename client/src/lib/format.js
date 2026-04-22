@@ -10,8 +10,8 @@ export function formatCurrency (value, currency = 'USD') {
   }
 }
 
-export function formatTimeLeft (endTime) {
-  const ms = new Date(endTime).getTime() - Date.now()
+export function formatTimeLeft (endTime, nowMs = Date.now()) {
+  const ms = new Date(endTime).getTime() - nowMs
   if (ms <= 0) return 'Ended'
   const total = Math.floor(ms / 1000)
   const h = Math.floor(total / 3600)

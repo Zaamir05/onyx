@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&family=Orbitron:wght@600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -12,7 +12,7 @@
 html, body, #root {
   margin: 0;
   min-height: 100%;
-  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   background: #04030b;
   color: #e5e7eb;
 }
@@ -23,23 +23,23 @@ body {
 
 .aurora-bg {
   background:
-    radial-gradient(circle at 18% 12%, rgba(101, 41, 255, 0.26), transparent 42%),
-    radial-gradient(circle at 82% 24%, rgba(0, 201, 255, 0.18), transparent 38%),
-    radial-gradient(circle at 58% 82%, rgba(255, 64, 204, 0.16), transparent 44%),
+    radial-gradient(circle at 18% 12%, rgba(20, 184, 166, 0.24), transparent 42%),
+    radial-gradient(circle at 82% 24%, rgba(14, 165, 233, 0.2), transparent 38%),
+    radial-gradient(circle at 58% 82%, rgba(16, 185, 129, 0.16), transparent 44%),
     #04030b;
 }
 
 .glass {
-  background: linear-gradient(135deg, rgba(21, 16, 38, 0.88), rgba(8, 7, 20, 0.82));
-  border: 1px solid rgba(122, 95, 255, 0.28);
+  background: linear-gradient(135deg, rgba(8, 22, 28, 0.88), rgba(4, 14, 22, 0.82));
+  border: 1px solid rgba(20, 184, 166, 0.22);
   backdrop-filter: blur(12px);
 }
 
 .neon-ring {
   box-shadow:
-    0 0 0 1px rgba(129, 140, 248, 0.36),
-    0 0 24px rgba(99, 102, 241, 0.38),
-    inset 0 0 22px rgba(56, 189, 248, 0.14);
+    0 0 0 1px rgba(45, 212, 191, 0.32),
+    0 0 24px rgba(56, 189, 248, 0.26),
+    inset 0 0 22px rgba(16, 185, 129, 0.14);
 }
 
 .loader-spin {
@@ -56,6 +56,14 @@ body {
 }
 
 h1, h2, h3, .font-display {
-  font-family: 'Orbitron', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   letter-spacing: 0.02em;
+}
+
+.font-display {
+  font-family: 'Orbitron', system-ui, sans-serif;
+}
+
+.font-code {
+  font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace;
 }

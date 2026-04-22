@@ -25,8 +25,8 @@ export function WalletPage () {
   return (
     <div className="aurora-bg min-h-screen">
       <section className="mx-auto w-full max-w-7xl px-4 py-10">
-        <p className="text-xs uppercase tracking-[0.2em] text-indigo-200">Onyx Wallet</p>
-        <h1 className="mt-2 font-display text-4xl font-semibold text-white">Credit balance and identity payload</h1>
+        <p className="text-xs uppercase tracking-[0.2em] text-cyan-200">Onyx Wallet</p>
+        <h1 className="mt-2 text-4xl font-semibold text-white">Credit balance and identity payload</h1>
         <p className="mt-3 max-w-3xl text-slate-300">
           ONX credits are used for bidding and final auction settlement. Credits transfer on successful finalization.
         </p>
@@ -41,7 +41,7 @@ export function WalletPage () {
             className="glass neon-ring mt-6 max-w-xl rounded-2xl p-6"
           >
             <p className="text-xs uppercase tracking-[0.18em] text-cyan-200">Wallet Snapshot</p>
-            <p className="mt-2 text-4xl font-display text-white">{user.onyxCredits.toLocaleString()} ONX</p>
+            <p className="mt-2 text-4xl font-semibold text-white">{user.onyxCredits.toLocaleString()} ONX</p>
             <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
               <Cell label="User" value={user.fullName} />
               <Cell label="Role" value={user.role} />

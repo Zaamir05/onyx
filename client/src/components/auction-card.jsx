@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import clsx from 'clsx'
 import { formatCurrency, formatTimeLeft } from '../lib/format'
 
-export function AuctionCard ({ auction, selected, onSelect }) {
+export function AuctionCard ({ auction, selected, onSelect, nowMs }) {
   const ended = auction.status !== 'active'
 
   return (
@@ -27,7 +27,7 @@ export function AuctionCard ({ auction, selected, onSelect }) {
       <p className="mb-3 line-clamp-2 text-xs text-slate-300">{auction.description}</p>
       <div className="flex items-center justify-between text-xs">
         <span className="text-cyan-200">{formatCurrency(auction.currentBid, auction.currency)}</span>
-        <span className="text-slate-400">{formatTimeLeft(auction.endTime)}</span>
+        <span className="text-slate-400">{formatTimeLeft(auction.endTime, nowMs)}</span>
       </div>
       <div className="mt-2 text-[11px] text-slate-400">{auction.bidCount} bids</div>
     </motion.button>
