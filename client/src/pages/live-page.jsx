@@ -1,6 +1,6 @@
+import { Navigate } from 'react-router-dom'
 import { useAuth } from '../hooks/use-auth'
 import { useAuctions } from '../hooks/use-auctions'
-import { AuthPanel } from '../components/auth-panel'
 import { LiveAuctionBoard } from '../components/live-auction-board'
 import { LoadingScreen } from '../components/loading-screen'
 
@@ -28,9 +28,7 @@ export function LivePage () {
           onLogout={auth.logout}
         />
       ) : (
-        <div className="mx-auto w-full max-w-7xl px-4 pb-10 pt-12">
-          <AuthPanel onLogin={auth.login} onRegister={auth.register} error={mergedError} />
-        </div>
+        <Navigate to="/auth?next=/live" replace />
       )}
     </div>
   )

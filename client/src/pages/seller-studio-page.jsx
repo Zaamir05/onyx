@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import { AuthPanel } from '../components/auth-panel'
+import { Link, Navigate } from 'react-router-dom'
 import { LoadingScreen } from '../components/loading-screen'
 import { apiRequest } from '../api/client'
 import { useAuth } from '../hooks/use-auth'
@@ -83,17 +82,7 @@ export function SellerStudioPage () {
   }
 
   if (!auth.user) {
-    return (
-      <div className="aurora-bg min-h-screen">
-        <section className="mx-auto w-full max-w-7xl px-4 py-10">
-          <p className="text-xs uppercase tracking-[0.2em] text-cyan-200">Seller Studio</p>
-          <h1 className="mt-2 text-4xl font-semibold text-white">Sign in as a seller to publish a live auction.</h1>
-          <div className="mt-8 max-w-md">
-            <AuthPanel onLogin={auth.login} onRegister={auth.register} error={auth.error} />
-          </div>
-        </section>
-      </div>
-    )
+    return <Navigate to="/auth?next=/seller-studio" replace />
   }
 
   if (auth.user.role !== 'seller' && auth.user.role !== 'admin') {

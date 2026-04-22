@@ -91,7 +91,7 @@ export function SiteNav () {
               </button>
             </div>
           ) : (
-            <Link to="/live" className="ml-2 rounded-full border border-cyan-300/30 px-3 py-1.5 text-xs text-cyan-100 hover:bg-cyan-400/10">
+            <Link to="/auth" className="ml-2 rounded-full border border-cyan-300/30 px-3 py-1.5 text-xs text-cyan-100 hover:bg-cyan-400/10">
               Sign in
             </Link>
           )}

@@ -7,6 +7,7 @@ import { SellerStudioPage } from './pages/seller-studio-page'
 import { AuctionDetailPage } from './pages/auction-detail-page'
 import { ProfilePage } from './pages/profile-page'
 import { FinishedAuctionsPage } from './pages/finished-auctions-page'
+import { AuthPage } from './pages/auth-page'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/marketplace" element={<MarketplacePage />} />
         <Route path="/finished" element={<FinishedAuctionsPage />} />
+        <Route path="/auth" element={<AuthPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/seller-studio" element={<SellerStudioPage />} />
         <Route path="/auctions/:auctionId" element={<AuctionDetailPage />} />

@@ -1,10 +1,18 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import clsx from 'clsx'
 
 const initialLogin = { email: '', password: '' }
 const initialRegister = { email: '', password: '', fullName: '', role: 'buyer' }
 
-export function AuthPanel ({ onLogin, onRegister, error }) {
+export function AuthPanel ({
+  onLogin,
+  onRegister,
+  error,
+  title = 'Access Onyx',
+  subtitle = 'Use one account flow for buyer and seller access.',
+  className
+}) {
   const [mode, setMode] = useState('login')
   const [loginValues, setLoginValues] = useState(initialLogin)
   const [registerValues, setRegisterValues] = useState(initialRegister)
@@ -46,8 +54,11 @@ export function AuthPanel ({ onLogin, onRegister, error }) {
     <motion.div
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass mx-auto w-full max-w-md rounded-3xl p-6"
+      className={clsx('glass mx-auto w-full max-w-md rounded-3xl p-6', className)}
     >
+      <p className="text-xs uppercase tracking-[0.2em] text-cyan-200">Authentication</p>
+      <h2 className="mt-2 text-2xl font-semibold text-white">{title}</h2>
+      <p className="mt-2 text-sm text-slate-300">{subtitle}</p>
       <div className="mb-4 flex rounded-full bg-white/5 p-1">
         <button
           onClick={() => setMode('login')}

@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { io } from 'socket.io-client'
-import { AuthPanel } from '../components/auth-panel'
 import { LoadingScreen } from '../components/loading-screen'
 import { AuctionImage } from '../components/auction-image'
 import { useAuth } from '../hooks/use-auth'
@@ -77,17 +76,7 @@ export function ProfilePage () {
   }
 
   if (!auth.user) {
-    return (
-      <div className="aurora-bg min-h-screen">
-        <section className="mx-auto w-full max-w-7xl px-4 py-10">
-          <p className="text-xs uppercase tracking-[0.2em] text-cyan-200">Profile</p>
-          <h1 className="mt-2 text-4xl font-semibold text-white">Sign in to view your profile and wins.</h1>
-          <div className="mt-8 max-w-md">
-            <AuthPanel onLogin={auth.login} onRegister={auth.register} error={auth.error} />
-          </div>
-        </section>
-      </div>
-    )
+    return <Navigate to="/auth?next=/profile" replace />
   }
 
   async function saveProfile (e) {
