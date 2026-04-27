@@ -5,7 +5,7 @@ const { User } = require('../modules/users/models/user.model')
 const { Auction, AUCTION_STATUS } = require('../modules/auctions/models/auction.model')
 const { Bid } = require('../modules/bids/models/bid.model')
 
-async function upsertUser ({ email, fullName, role, password }) {
+async function upsertUser ({ email, fullName, role, password, credits }) {
   const normalizedEmail = email.trim().toLowerCase()
   let user = await User.findOne({ email: normalizedEmail }).select('+passwordHash')
   if (!user) {
@@ -17,7 +17,7 @@ async function upsertUser ({ email, fullName, role, password }) {
   }
   user.fullName = fullName
   user.role = role
-  user.onyxCredits = role === 'seller' ? 220000 : 175000
+  user.onyxCredits = credits ?? (role === 'seller' ? 220000 : role === 'admin' ? 500000 : 175000)
   await user.setPassword(password)
   await user.save()
   return user
@@ -33,6 +33,14 @@ async function seed () {
     fullName: 'Demo Seller',
     role: 'seller',
     password: demoPassword
+  })
+
+  await upsertUser({
+    email: 'admin@aetherbid.dev',
+    fullName: 'Demo Admin',
+    role: 'admin',
+    password: demoPassword,
+    credits: 500000
   })
 
   const buyer1 = await upsertUser({
@@ -216,6 +224,7 @@ async function seed () {
   console.log('Onyx credits initialized for demo users')
   console.log('Login credentials:')
   console.log('seller@aetherbid.dev / DemoPass#2026!!')
+  console.log('admin@aetherbid.dev / DemoPass#2026!!')
   console.log('buyer1@aetherbid.dev / DemoPass#2026!!')
   console.log('buyer2@aetherbid.dev / DemoPass#2026!!')
 }

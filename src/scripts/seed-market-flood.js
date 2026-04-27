@@ -289,6 +289,14 @@ async function seed () {
     credits: 250000
   })
 
+  await upsertUser({
+    email: 'admin@aetherbid.dev',
+    fullName: 'Demo Admin',
+    role: 'admin',
+    password: DEMO_PASSWORD,
+    credits: 500000
+  })
+
   const buyers = await Promise.all([
     upsertUser({
       email: 'buyer1@aetherbid.dev',
@@ -385,6 +393,7 @@ async function seed () {
   console.log(`Seeded ${seededAuctions.length} live auctions and ${archiveSeeds.length} finished showcase items.`)
   console.log('Login credentials:')
   console.log('seller@aetherbid.dev / DemoPass#2026!!')
+  console.log('admin@aetherbid.dev / DemoPass#2026!!')
   console.log('buyer1@aetherbid.dev / DemoPass#2026!!')
   console.log('buyer2@aetherbid.dev / DemoPass#2026!!')
   console.log('buyer3@aetherbid.dev / DemoPass#2026!!')

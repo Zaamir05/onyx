@@ -8,6 +8,7 @@ import { AuctionDetailPage } from './pages/auction-detail-page'
 import { ProfilePage } from './pages/profile-page'
 import { FinishedAuctionsPage } from './pages/finished-auctions-page'
 import { AuthPage } from './pages/auth-page'
+import { AdminPage } from './pages/admin-page'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/auth" element={<AuthPage />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/seller-studio" element={<SellerStudioPage />} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="/auctions/:auctionId" element={<AuctionDetailPage />} />
         <Route path="/live" element={<LivePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />

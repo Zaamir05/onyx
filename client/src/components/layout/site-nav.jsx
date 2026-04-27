@@ -70,6 +70,19 @@ export function SiteNav () {
               {item.label}
             </NavLink>
           ))}
+          {user?.role === 'admin' ? (
+            <NavLink
+              to="/admin"
+              className={({ isActive }) =>
+                clsx(
+                  'rounded-full px-3 py-1.5 text-xs tracking-wide transition',
+                  isActive ? 'bg-rose-400/20 text-rose-100' : 'text-rose-200 hover:bg-white/10'
+                )
+              }
+            >
+              Admin
+            </NavLink>
+          ) : null}
           {user ? (
             <div className="ml-2 flex items-center gap-2 rounded-full border border-white/15 bg-black/20 px-2 py-1">
               <Link to="/profile" className="flex items-center gap-2">
