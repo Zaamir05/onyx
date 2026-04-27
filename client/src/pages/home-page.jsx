@@ -1,154 +1,219 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
-const stats = [
-  { label: 'Bid throughput', value: '2.6K / min' },
-  { label: 'Finalization cadence', value: '10s sweep' },
-  { label: 'Integrity', value: '99.997%' }
+const proofPoints = [
+  { label: 'Live signal', value: 'Sub-second' },
+  { label: 'Closeout sweep', value: 'Every 10s' },
+  { label: 'Bid integrity', value: 'OCC + txns' }
 ]
 
-const features = [
+const trustMarks = ['Seller tools', 'Live floor', 'Finished reports', 'Admin console', 'Profile', 'Settlement']
+
+const brandMarks = [
+  'NovaGrid',
+  'Aether Labs',
+  'SignalForge',
+  'Helix Capital',
+  'Blackline',
+  'Orchid Ops',
+  'Terminal West',
+  'Ghostframe'
+]
+
+const pillars = [
   {
-    title: 'Realtime bidding',
-    description: 'Instant bid propagation across marketplace, live floor, and profile dashboards.'
+    title: 'Fast to list',
+    copy: 'Drop a lot, set a timer, and go live in one clean flow.'
   },
   {
-    title: 'Deterministic closeout',
-    description: 'Auction winners are locked through transactional updates and OCC protection.'
+    title: 'Easy to bid',
+    copy: 'Buyers get a focused marketplace with live pricing and instant feedback.'
   },
   {
-    title: 'Operator-grade reporting',
-    description: 'Finished auctions open into detailed post-auction analytics and timelines.'
+    title: 'Clear to trust',
+    copy: 'Transactions, reporting, and settlement stay visible after the hammer falls.'
   }
 ]
 
-const logos = ['NovaGrid', 'Aether Labs', 'SignalForge', 'Helix Capital']
+const steps = [
+  { step: '01', title: 'List', copy: 'Publish a lot with price, image, and duration.' },
+  { step: '02', title: 'Compete', copy: 'Watch bids move live across the floor.' },
+  { step: '03', title: 'Settle', copy: 'See the outcome in reports, profile, and admin views.' }
+]
 
 const reviews = [
-  { name: 'S. Kade', role: 'Marketplace Ops', quote: 'Realtime bid propagation feels instantaneous, even under heavy traffic.' },
-  { name: 'M. Voss', role: 'Seller Lead', quote: 'Listing creation is clean and fast. The reporting view is exactly what we need.' },
-  { name: 'J. Riven', role: 'Security Engineer', quote: 'OCC + transactional writes are implemented properly — no race issues.' },
-  { name: 'I. Sol', role: 'Growth Ops', quote: 'Live auction experience feels premium and stable. Great operator UX.' },
-  { name: 'R. Nyx', role: 'Product', quote: 'Unified auth flow makes onboarding smooth for both buyers and sellers.' }
+  { name: 'S. Kade', role: 'Marketplace Ops', quote: 'Clean, fast, and easy to explain to stakeholders.' },
+  { name: 'M. Voss', role: 'Seller Lead', quote: 'The listing flow stays out of the way and gets the job done.' },
+  { name: 'J. Riven', role: 'Security', quote: 'The transaction story is the real selling point.' },
+  { name: 'I. Sol', role: 'Growth', quote: 'Feels like a product teams would actually ship.' }
 ]
 
 export function HomePage () {
   return (
     <div className="onyx-landing min-h-screen pb-16">
-      <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-12 lg:grid-cols-[1.1fr,0.9fr] lg:items-center">
+      <section className="mx-auto w-full max-w-6xl px-4 py-14">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="space-y-5"
+          transition={{ duration: 0.55, ease: 'easeOut' }}
+          className="space-y-6 text-center"
         >
           <motion.p
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="inline-flex rounded-full border border-emerald-300/30 bg-emerald-400/10 px-3 py-1 text-xs uppercase tracking-[0.22em] text-emerald-200"
+            transition={{ delay: 0.08 }}
+            className="inline-flex rounded-full border border-emerald-300/30 bg-black/45 px-3 py-1 text-xs uppercase tracking-[0.22em] text-emerald-200"
           >
-            Onyx Auction Platform
+            Onyx auction platform
           </motion.p>
+
           <motion.h1
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="text-4xl font-semibold leading-tight text-white sm:text-5xl"
+            transition={{ delay: 0.14 }}
+            className="mx-auto max-w-3xl text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl"
           >
-            Professional realtime auctions with precision-grade reliability.
+            Live auctions that feel sharp, modern, and easy to trust.
           </motion.h1>
+
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="max-w-xl text-base text-slate-300"
+            className="mx-auto max-w-2xl text-base text-slate-300 sm:text-lg"
           >
-            Built for real operations: transaction-safe bidding, live updates, and clear post-auction reporting.
+            One place for buyers, sellers, and operators to list, bid, settle, and review outcomes.
           </motion.p>
+
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.25 }}
-            className="flex flex-wrap gap-3"
+            transition={{ delay: 0.26 }}
+            className="flex flex-wrap justify-center gap-3"
           >
             <Link to="/auth" className="rounded-xl bg-emerald-400 px-5 py-2.5 text-sm font-semibold text-slate-950">
-              Start now
+              Get started
             </Link>
             <Link to="/marketplace" className="rounded-xl border border-white/20 px-5 py-2.5 text-sm text-slate-200 hover:bg-white/10">
-              View marketplace
+              Browse marketplace
             </Link>
           </motion.div>
+
           <motion.div
-            initial={{ opacity: 0, y: 6 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-slate-500"
+            transition={{ delay: 0.32 }}
+            className="flex flex-wrap justify-center gap-2 text-[11px] uppercase tracking-[0.2em] text-slate-500"
           >
-            {logos.map((logo) => (
-              <span key={logo} className="rounded-full border border-white/10 bg-black/20 px-3 py-1">
-                {logo}
+            {trustMarks.map((item) => (
+              <span key={item} className="rounded-full border border-white/10 bg-black/40 px-3 py-1">
+                {item}
               </span>
             ))}
           </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.55, ease: 'easeOut' }}
+            className="onyx-panel rounded-3xl p-6 text-left"
+          >
+            <div className="flex items-center justify-between">
+              <p className="text-xs uppercase tracking-[0.18em] text-emerald-200">Launch snapshot</p>
+              <span className="rounded-full bg-emerald-400/15 px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-emerald-200">
+                Live
+              </span>
+            </div>
+
+            <div className="mt-5 grid gap-3 sm:grid-cols-3">
+              {proofPoints.map((item) => (
+                <div key={item.label} className="rounded-2xl border border-white/10 bg-black/55 p-4">
+                  <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">{item.label}</p>
+                  <p className="mt-2 text-sm font-semibold text-emerald-200">{item.value}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-black/45 p-4">
+                <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">Core surfaces</p>
+                <p className="mt-2 text-sm text-slate-200">Marketplace, live floor, profile, finished reports, seller studio, admin panel.</p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-black/45 p-4">
+                <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">Built for</p>
+                <p className="mt-2 text-sm text-slate-200">Buyers, sellers, operators, and demo flows that need to feel credible.</p>
+              </div>
+            </div>
+
+            <div className="onyx-divider mt-5" />
+
+            <div className="mt-5 space-y-3">
+              <MiniFlow label="Live floor" copy="Active lots move instantly when bids land." />
+              <MiniFlow label="Profile" copy="Placed bids, wins, and seller activity all stay visible." />
+              <MiniFlow label="Reports" copy="Finished auctions open into clean post-auction detail." />
+            </div>
+          </motion.div>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="onyx-panel rounded-3xl p-6"
-        >
-          <div className="flex items-center justify-between">
-            <p className="text-xs uppercase tracking-[0.18em] text-emerald-200">Live signal</p>
-            <span className="rounded-full bg-emerald-400/15 px-2 py-1 text-[10px] uppercase tracking-[0.12em] text-emerald-200">Onyx</span>
-          </div>
-          <div className="mt-5 space-y-3">
-            {stats.map((item, index) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, x: 12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 + index * 0.08 }}
-                className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/30 px-4 py-3"
-              >
-                <span className="text-xs uppercase tracking-[0.16em] text-slate-400">{item.label}</span>
-                <span className="text-sm font-semibold text-emerald-200">{item.value}</span>
-              </motion.div>
-            ))}
-          </div>
-          <div className="onyx-divider mt-5" />
-          <p className="mt-4 text-sm text-slate-300">
-            Unified auth for buyers and sellers. Fast onboarding, reliable bidding, and verified outcomes.
-          </p>
-        </motion.div>
+
+        <div className="mt-8 grid gap-3 rounded-3xl border border-white/10 bg-black/45 p-4 sm:grid-cols-2 lg:grid-cols-4">
+          {brandMarks.map((brand) => (
+            <div key={brand} className="flex items-center justify-center rounded-2xl border border-white/10 bg-black/35 px-3 py-4 text-xs uppercase tracking-[0.2em] text-slate-400">
+              {brand}
+            </div>
+          ))}
+        </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-4 py-8">
+      <section className="mx-auto w-full max-w-7xl px-4 py-6">
         <div className="grid gap-4 md:grid-cols-3">
-          {features.map((feature, index) => (
+          {pillars.map((pillar, index) => (
             <motion.div
-              key={feature.title}
+              key={pillar.title}
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.08 }}
               className="onyx-panel rounded-2xl p-5"
             >
-              <h2 className="text-lg font-semibold text-white">{feature.title}</h2>
-              <p className="mt-2 text-sm text-slate-300">{feature.description}</p>
+              <p className="text-[11px] uppercase tracking-[0.18em] text-emerald-200">Why teams use Onyx</p>
+              <h2 className="mt-2 text-lg font-semibold text-white">{pillar.title}</h2>
+              <p className="mt-2 text-sm text-slate-300">{pillar.copy}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-7xl px-4 py-8">
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex items-end justify-between gap-4">
           <div>
-            <p className="text-xs uppercase tracking-[0.18em] text-emerald-200">Operator feedback</p>
-            <h2 className="mt-2 text-2xl font-semibold text-white">Teams running live auctions on Onyx</h2>
+            <p className="text-xs uppercase tracking-[0.18em] text-emerald-200">Simple flow</p>
+            <h2 className="mt-2 text-2xl font-semibold text-white">List, bid, settle.</h2>
           </div>
         </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {steps.map((item, index) => (
+            <motion.div
+              key={item.step}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.08 }}
+              className="glass rounded-2xl p-5"
+            >
+              <p className="font-code text-xs uppercase tracking-[0.18em] text-cyan-200">{item.step}</p>
+              <h3 className="mt-2 text-lg font-semibold text-white">{item.title}</h3>
+              <p className="mt-2 text-sm text-slate-300">{item.copy}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-7xl px-4 py-8">
         <div className="onyx-panel rounded-3xl p-6">
+          <div className="mb-4">
+            <p className="text-xs uppercase tracking-[0.18em] text-emerald-200">Operator feedback</p>
+            <h2 className="mt-2 text-2xl font-semibold text-white">Short quotes, real signal.</h2>
+          </div>
           <div className="marquee">
             <div className="marquee-track">
               {[...reviews, ...reviews].map((review, idx) => (
@@ -183,20 +248,32 @@ export function HomePage () {
         >
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.18em] text-emerald-200">Launch flow</p>
-              <h2 className="mt-2 text-2xl font-semibold text-white">Create a seller lot, bid as buyer, review the outcome.</h2>
+              <p className="text-xs uppercase tracking-[0.18em] text-emerald-200">Ready to go</p>
+              <h2 className="mt-2 text-2xl font-semibold text-white">Start with a seller account or jump straight into bidding.</h2>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Link to="/seller-studio" className="rounded-xl bg-emerald-400 px-5 py-2.5 text-sm font-semibold text-slate-950">
-                Open Seller Studio
+              <Link to="/auth" className="rounded-xl bg-emerald-400 px-5 py-2.5 text-sm font-semibold text-slate-950">
+                Create account
               </Link>
-              <Link to="/finished" className="rounded-xl border border-white/20 px-5 py-2.5 text-sm text-slate-200 hover:bg-white/10">
-                Finished reports
+              <Link to="/live" className="rounded-xl border border-white/20 px-5 py-2.5 text-sm text-slate-200 hover:bg-white/10">
+                Open live floor
               </Link>
             </div>
           </div>
         </motion.div>
       </section>
+    </div>
+  )
+}
+
+function MiniFlow ({ label, copy }) {
+  return (
+    <div className="flex items-start gap-3 rounded-2xl border border-white/10 bg-black/25 p-4">
+      <span className="mt-1 h-2.5 w-2.5 rounded-full bg-emerald-300 shadow-[0_0_18px_rgba(110,231,183,0.9)]" />
+      <div>
+        <p className="text-xs uppercase tracking-[0.18em] text-slate-400">{label}</p>
+        <p className="mt-1 text-sm text-slate-200">{copy}</p>
+      </div>
     </div>
   )
 }
