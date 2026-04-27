@@ -67,7 +67,7 @@ This repository contains a full-stack auction platform designed around a modular
 Clone the repository and enter it:
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/thunderstruckdude/onyx
 cd auction
 ```
 
@@ -148,7 +148,6 @@ Required:
 
 - `MONGODB_URI`
 - `JWT_ACCESS_SECRET`
-
 
 
 ## Scripts
