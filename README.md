@@ -21,6 +21,21 @@ If you prefer a non-root Docker workflow, add your user to the `docker` group an
 
 On Windows, the recommended path is WSL2 with Docker Desktop integration. Running the repository directly in PowerShell can work, but the Docker and shell commands in this README are written for Bash. If you use Windows without WSL2, replace the shell commands with PowerShell equivalents and make sure Docker Desktop is configured to share the project directory.
 
+### Windows setup checklist
+
+For Windows contributors, the safest setup is:
+
+1. Install Git for Windows and Node.js 20+.
+2. Install Docker Desktop and enable WSL2 integration.
+3. Open the repo inside WSL2 if possible, then run the same commands shown below.
+4. If you stay in PowerShell instead of WSL2, replace Bash commands with PowerShell equivalents:
+   - `cp .env.example .env` → `Copy-Item .env.example .env`
+   - `rm -rf client/dist` → `Remove-Item -Recurse -Force client/dist`
+5. Keep the project on a local disk path that Docker Desktop can access.
+6. Do not rely on a local MongoDB install unless you are comfortable configuring a replica set manually.
+
+The project dependencies themselves are standard Node.js packages and are compatible with Windows. The main platform-sensitive part is the MongoDB replica-set requirement, which is handled automatically if you use the Docker workflow.
+
 ## Tech stack
 
 - Backend: Node.js, Express, Mongoose
@@ -86,6 +101,8 @@ git clone https://github.com/thunderstruckdude/onyx
 cd onyx
 ```
 
+On Windows PowerShell, the clone flow is the same, but if you are using WSL2 you should run the commands from inside the Linux shell after cloning into the WSL filesystem.
+
 Install dependencies for both the backend and client:
 
 ```bash
@@ -97,6 +114,12 @@ Copy the example environment file and fill in the required values:
 
 ```bash
 cp .env.example .env
+```
+
+PowerShell equivalent:
+
+```powershell
+Copy-Item .env.example .env
 ```
 
 Minimum required values:
@@ -114,6 +137,8 @@ If you are using Docker, the MongoDB URI can point at the replica-set container 
 - If you edit the repo in a Windows IDE, make sure executable flags on shell scripts are preserved.
 - Docker Desktop should have WSL integration enabled if you are using the WSL workflow.
 - If you are not using WSL2, substitute the Bash commands in this README with PowerShell equivalents and expect the Docker compose commands to behave slightly differently on your machine.
+- The seed and worker scripts are invoked through Node or Docker, so they do not require native Bash on Windows when you use Docker Desktop or WSL2.
+- If you see `ERR_DLOPEN_FAILED` in WSL, delete `node_modules` in both the root and `client/` directories and reinstall inside the same environment. The app now uses `bcryptjs`, which is pure JavaScript, so it does not require a native rebuild on Windows or WSL.
 
 ### Start everything with Docker
 
@@ -134,6 +159,8 @@ For a heavier marketplace demo:
 ```bash
 npm run seed:flood
 ```
+
+Use `seed:flood`, not `seed:floor`.
 
 ### Start the app without Docker
 

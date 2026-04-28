@@ -1,6 +1,7 @@
 const { HTTP_STATUS } = require('../constants/http-status')
 
-function errorMiddleware (err, req, res, _next) {
+function errorMiddleware (err, req, res, next) {
+  void next
   const statusCode = Number(err.statusCode || HTTP_STATUS.INTERNAL_SERVER_ERROR)
   const payload = {
     error: {

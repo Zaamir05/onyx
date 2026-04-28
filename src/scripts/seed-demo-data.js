@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+const mongoose = require('mongoose')
 const { env } = require('../config/env')
 const { connectDatabase } = require('../db/connect')
 const { User } = require('../modules/users/models/user.model')
@@ -25,41 +25,41 @@ async function upsertUser ({ email, fullName, role, password, credits }) {
 
 async function seed () {
   await connectDatabase(env.mongoUri)
+  try {
+    const demoPassword = 'DemoPass#2026!!'
 
-  const demoPassword = 'DemoPass#2026!!'
+    const seller = await upsertUser({
+      email: 'seller@aetherbid.dev',
+      fullName: 'Demo Seller',
+      role: 'seller',
+      password: demoPassword
+    })
 
-  const seller = await upsertUser({
-    email: 'seller@aetherbid.dev',
-    fullName: 'Demo Seller',
-    role: 'seller',
-    password: demoPassword
-  })
+    await upsertUser({
+      email: 'admin@aetherbid.dev',
+      fullName: 'Demo Admin',
+      role: 'admin',
+      password: demoPassword,
+      credits: 500000
+    })
 
-  await upsertUser({
-    email: 'admin@aetherbid.dev',
-    fullName: 'Demo Admin',
-    role: 'admin',
-    password: demoPassword,
-    credits: 500000
-  })
+    const buyer1 = await upsertUser({
+      email: 'buyer1@aetherbid.dev',
+      fullName: 'Demo Buyer One',
+      role: 'buyer',
+      password: demoPassword
+    })
 
-  const buyer1 = await upsertUser({
-    email: 'buyer1@aetherbid.dev',
-    fullName: 'Demo Buyer One',
-    role: 'buyer',
-    password: demoPassword
-  })
+    const buyer2 = await upsertUser({
+      email: 'buyer2@aetherbid.dev',
+      fullName: 'Demo Buyer Two',
+      role: 'buyer',
+      password: demoPassword
+    })
 
-  const buyer2 = await upsertUser({
-    email: 'buyer2@aetherbid.dev',
-    fullName: 'Demo Buyer Two',
-    role: 'buyer',
-    password: demoPassword
-  })
-
-  const now = Date.now()
-  const end = new Date(now + 1000 * 60 * 90)
-  const start = new Date(now - 1000 * 60 * 30)
+    const now = Date.now()
+    const end = new Date(now + 1000 * 60 * 90)
+    const start = new Date(now - 1000 * 60 * 30)
 
   const cyberAuctions = [
     ['NeuroLink Mk-IV Cortex Jack', 'Military-grade neural uplink with low-latency wetware translation and hardened intrusion mesh.', 8800, 120, 'Neural Implants', 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80'],
@@ -220,18 +220,20 @@ async function seed () {
     await archiveAuction.save()
   }
 
-  console.log('Demo seed complete')
-  console.log('Onyx credits initialized for demo users')
-  console.log('Login credentials:')
-  console.log('seller@aetherbid.dev / DemoPass#2026!!')
-  console.log('admin@aetherbid.dev / DemoPass#2026!!')
-  console.log('buyer1@aetherbid.dev / DemoPass#2026!!')
-  console.log('buyer2@aetherbid.dev / DemoPass#2026!!')
+    console.log('Demo seed complete')
+    console.log('Onyx credits initialized for demo users')
+    console.log('Login credentials:')
+    console.log('seller@aetherbid.dev / DemoPass#2026!!')
+    console.log('admin@aetherbid.dev / DemoPass#2026!!')
+    console.log('buyer1@aetherbid.dev / DemoPass#2026!!')
+    console.log('buyer2@aetherbid.dev / DemoPass#2026!!')
+  } finally {
+    await mongoose.disconnect()
+  }
 }
 
 seed()
-  .then(() => process.exit(0))
   .catch((error) => {
     console.error('Seed failed:', error)
-    process.exit(1)
+    process.exitCode = 1
   })
