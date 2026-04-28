@@ -6,6 +6,21 @@ Production-oriented auction application with a modular Node.js backend, a React 
 
 This repository contains a full-stack auction platform designed around a modular monolith backend and a separate Vite-based client. The backend exposes versioned REST APIs under `/api/v1`, keeps bids in a dedicated collection, and uses MongoDB replica-set transactions plus optimistic concurrency control to protect bid writes. The client provides marketplace, live auction, profile, seller studio, finished-auction reporting, and admin views.
 
+## Development environment
+
+This project was built and validated on Arch Linux using Bash, Docker, and the standard GNU userland. The commands in this README assume a Unix-like shell.
+
+Suggested Arch Linux packages:
+
+```bash
+sudo pacman -S --needed git nodejs npm docker docker-compose
+sudo systemctl enable --now docker
+```
+
+If you prefer a non-root Docker workflow, add your user to the `docker` group and re-login.
+
+On Windows, the recommended path is WSL2 with Docker Desktop integration. Running the repository directly in PowerShell can work, but the Docker and shell commands in this README are written for Bash. If you use Windows without WSL2, replace the shell commands with PowerShell equivalents and make sure Docker Desktop is configured to share the project directory.
+
 ## Tech stack
 
 - Backend: Node.js, Express, Mongoose
@@ -68,7 +83,7 @@ Clone the repository and enter it:
 
 ```bash
 git clone https://github.com/thunderstruckdude/onyx
-cd auction
+cd onyx
 ```
 
 Install dependencies for both the backend and client:
@@ -90,6 +105,15 @@ Minimum required values:
 - `JWT_ACCESS_SECRET`
 
 If you are using Docker, the MongoDB URI can point at the replica-set container name. If you are running MongoDB directly on your machine, the database must be started as a replica set because bid placement uses transactions.
+
+### Windows contributor notes
+
+- Use WSL2 if possible. It avoids most path, permission, and shell issues.
+- Clone the repository inside the WSL filesystem, not a Windows-mounted path, if you want the smoothest Docker and file-watch behavior.
+- Keep line endings as LF for shell scripts and configuration files.
+- If you edit the repo in a Windows IDE, make sure executable flags on shell scripts are preserved.
+- Docker Desktop should have WSL integration enabled if you are using the WSL workflow.
+- If you are not using WSL2, substitute the Bash commands in this README with PowerShell equivalents and expect the Docker compose commands to behave slightly differently on your machine.
 
 ### Start everything with Docker
 
