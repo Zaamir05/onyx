@@ -1,6 +1,10 @@
 function asyncHandler (fn) {
-  return function wrappedAsyncHandler (req, res, next) {
-    Promise.resolve(fn(req, res, next)).catch(next)
+  return async function wrappedAsyncHandler (req, res, next) {
+    try {
+      await fn(req, res, next)
+    } catch (error) {
+      next(error)
+    }
   }
 }
 

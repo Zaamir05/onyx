@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const mongoose = require('mongoose')
 const { env } = require('../config/env')
 const { User } = require('../modules/users/models/user.model')
@@ -280,129 +279,131 @@ async function seedAuction (auctionSeed, seller, buyerPool, startedMinutesAgo, e
 async function seed () {
   const connectedTo = await connectWithFallback(env.mongoUri)
   console.log(`Connected to MongoDB at ${connectedTo}`)
-
-  const seller = await upsertUser({
-    email: 'seller@aetherbid.dev',
-    fullName: 'Demo Seller',
-    role: 'seller',
-    password: DEMO_PASSWORD,
-    credits: 250000
-  })
-
-  await upsertUser({
-    email: 'admin@aetherbid.dev',
-    fullName: 'Demo Admin',
-    role: 'admin',
-    password: DEMO_PASSWORD,
-    credits: 500000
-  })
-
-  const buyers = await Promise.all([
-    upsertUser({
-      email: 'buyer1@aetherbid.dev',
-      fullName: 'Demo Buyer One',
-      role: 'buyer',
+  try {
+    const seller = await upsertUser({
+      email: 'seller@aetherbid.dev',
+      fullName: 'Demo Seller',
+      role: 'seller',
       password: DEMO_PASSWORD,
-      credits: 225000
-    }),
-    upsertUser({
-      email: 'buyer2@aetherbid.dev',
-      fullName: 'Demo Buyer Two',
-      role: 'buyer',
-      password: DEMO_PASSWORD,
-      credits: 225000
-    }),
-    upsertUser({
-      email: 'buyer3@aetherbid.dev',
-      fullName: 'Demo Buyer Three',
-      role: 'buyer',
-      password: DEMO_PASSWORD,
-      credits: 225000
-    }),
-    upsertUser({
-      email: 'buyer4@aetherbid.dev',
-      fullName: 'Demo Buyer Four',
-      role: 'buyer',
-      password: DEMO_PASSWORD,
-      credits: 225000
+      credits: 250000
     })
-  ])
 
-  await Promise.all([
-    Auction.deleteMany({}),
-    Bid.deleteMany({})
-  ])
+    await upsertUser({
+      email: 'admin@aetherbid.dev',
+      fullName: 'Demo Admin',
+      role: 'admin',
+      password: DEMO_PASSWORD,
+      credits: 500000
+    })
 
-  const fantasyCorpus = await loadFantasyCorpus()
-  const fantasySeeds = buildFantasySeeds(fantasyCorpus).slice(0, 18)
-  const cyberSeeds = buildCyberpunkSeeds(30)
-  const activeSeeds = [...cyberSeeds, ...fantasySeeds]
+    const buyers = await Promise.all([
+      upsertUser({
+        email: 'buyer1@aetherbid.dev',
+        fullName: 'Demo Buyer One',
+        role: 'buyer',
+        password: DEMO_PASSWORD,
+        credits: 225000
+      }),
+      upsertUser({
+        email: 'buyer2@aetherbid.dev',
+        fullName: 'Demo Buyer Two',
+        role: 'buyer',
+        password: DEMO_PASSWORD,
+        credits: 225000
+      }),
+      upsertUser({
+        email: 'buyer3@aetherbid.dev',
+        fullName: 'Demo Buyer Three',
+        role: 'buyer',
+        password: DEMO_PASSWORD,
+        credits: 225000
+      }),
+      upsertUser({
+        email: 'buyer4@aetherbid.dev',
+        fullName: 'Demo Buyer Four',
+        role: 'buyer',
+        password: DEMO_PASSWORD,
+        credits: 225000
+      })
+    ])
 
-  const seededAuctions = []
-  for (let i = 0; i < activeSeeds.length; i += 1) {
-    const auction = await seedAuction(
-      activeSeeds[i],
-      seller,
-      buyers,
-      randomInt(10, 120),
-      randomInt(40, 180),
-      AUCTION_STATUS.ACTIVE
-    )
-    seededAuctions.push(auction)
-  }
+    await Promise.all([
+      Auction.deleteMany({}),
+      Bid.deleteMany({})
+    ])
 
-  const archiveSeeds = [
-    {
-      title: 'Onyx Archive: Dragon Crown of the Warden',
-      description: 'A finished showcase relic used for the won-panel and report pages.',
-      basePrice: 12400,
-      minBidIncrement: 220,
-      category: 'Mythic Relics',
-      imageUrl: fantasyImages[0]
-    },
-    {
-      title: 'Onyx Archive: Chrome Revenant Spear',
-      description: 'Settled cyber-fantasy hybrid with a clean closing ledger.',
-      basePrice: 15900,
-      minBidIncrement: 260,
-      category: 'Hybrid Relics',
-      imageUrl: cyberpunkImages[1]
-    },
-    {
-      title: 'Onyx Archive: Astral Circuit Tome',
-      description: 'Closed auction for a recovered spellbook-backed data shard.',
-      basePrice: 9800,
-      minBidIncrement: 180,
-      category: 'Arcane Systems',
-      imageUrl: fantasyImages[3]
+    const fantasyCorpus = await loadFantasyCorpus()
+    const fantasySeeds = buildFantasySeeds(fantasyCorpus).slice(0, 18)
+    const cyberSeeds = buildCyberpunkSeeds(30)
+    const activeSeeds = [...cyberSeeds, ...fantasySeeds]
+
+    const seededAuctions = []
+    for (let i = 0; i < activeSeeds.length; i += 1) {
+      const auction = await seedAuction(
+        activeSeeds[i],
+        seller,
+        buyers,
+        randomInt(10, 120),
+        randomInt(40, 180),
+        AUCTION_STATUS.ACTIVE
+      )
+      seededAuctions.push(auction)
     }
-  ]
 
-  for (const archiveSeed of archiveSeeds) {
-    await seedAuction(
-      archiveSeed,
-      seller,
-      buyers,
-      randomInt(160, 360),
-      randomInt(-180, -20),
-      AUCTION_STATUS.SETTLED
-    )
+    const archiveSeeds = [
+      {
+        title: 'Onyx Archive: Dragon Crown of the Warden',
+        description: 'A finished showcase relic used for the won-panel and report pages.',
+        basePrice: 12400,
+        minBidIncrement: 220,
+        category: 'Mythic Relics',
+        imageUrl: fantasyImages[0]
+      },
+      {
+        title: 'Onyx Archive: Chrome Revenant Spear',
+        description: 'Settled cyber-fantasy hybrid with a clean closing ledger.',
+        basePrice: 15900,
+        minBidIncrement: 260,
+        category: 'Hybrid Relics',
+        imageUrl: cyberpunkImages[1]
+      },
+      {
+        title: 'Onyx Archive: Astral Circuit Tome',
+        description: 'Closed auction for a recovered spellbook-backed data shard.',
+        basePrice: 9800,
+        minBidIncrement: 180,
+        category: 'Arcane Systems',
+        imageUrl: fantasyImages[3]
+      }
+    ]
+
+    for (const archiveSeed of archiveSeeds) {
+      await seedAuction(
+        archiveSeed,
+        seller,
+        buyers,
+        randomInt(160, 360),
+        randomInt(-180, -20),
+        AUCTION_STATUS.SETTLED
+      )
+    }
+
+    console.log('Market flood seed complete')
+    console.log(`Seeded ${seededAuctions.length} live auctions and ${archiveSeeds.length} finished showcase items.`)
+    console.log('Login credentials:')
+    console.log('seller@aetherbid.dev / DemoPass#2026!!')
+    console.log('admin@aetherbid.dev / DemoPass#2026!!')
+    console.log('buyer1@aetherbid.dev / DemoPass#2026!!')
+    console.log('buyer2@aetherbid.dev / DemoPass#2026!!')
+    console.log('buyer3@aetherbid.dev / DemoPass#2026!!')
+    console.log('buyer4@aetherbid.dev / DemoPass#2026!!')
+  } finally {
+    await mongoose.disconnect()
   }
-
-  console.log('Market flood seed complete')
-  console.log(`Seeded ${seededAuctions.length} live auctions and ${archiveSeeds.length} finished showcase items.`)
-  console.log('Login credentials:')
-  console.log('seller@aetherbid.dev / DemoPass#2026!!')
-  console.log('admin@aetherbid.dev / DemoPass#2026!!')
-  console.log('buyer1@aetherbid.dev / DemoPass#2026!!')
-  console.log('buyer2@aetherbid.dev / DemoPass#2026!!')
-  console.log('buyer3@aetherbid.dev / DemoPass#2026!!')
-  console.log('buyer4@aetherbid.dev / DemoPass#2026!!')
 }
 
 seed()
-  .then(() => process.exit(0))
   .catch((error) => {
     console.error('Seed failed:', error)
-    process.exit(1)
+    process.exitCode = 1
   })
